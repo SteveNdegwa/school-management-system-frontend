@@ -1,5 +1,5 @@
-import Input from "./Input"
-import Label from "./Label"
+import Input from "./Input";
+import Label from "./Label";
 
 interface props{
     inputId: string,
@@ -13,7 +13,6 @@ export default function InputLabel({inputId, inputType, yupRegister, labelName}:
         <div>
             <Label inputId={inputId} labelName={labelName}/>
             <Input inputType={inputType} inputId={inputId} yupRegister={yupRegister}/>
-            
         </div>
-    )
+    );
 };

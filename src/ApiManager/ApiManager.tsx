@@ -1,7 +1,10 @@
 import ApiMethods from "./ApiMethods";
 import ENDPOINTS from "./EndPoints";
+import { store } from "../store";
 
 class ApiManager {
+    static storeState = store.getState();
+
     static login = (data: object) => {
         const url = ENDPOINTS.LOGIN();
         return ApiMethods.post(url, data);
@@ -24,6 +27,11 @@ class ApiManager {
 
     static fetchProfile = (data: object) => {
         const url = ENDPOINTS.FETCH_PROFILE();
+        return ApiMethods.post(url, data);
+    };
+
+    static filterUsers = (data: object = {}) => {
+        const url = ENDPOINTS.FILTER_USERS();
         return ApiMethods.post(url, data);
     };
 }

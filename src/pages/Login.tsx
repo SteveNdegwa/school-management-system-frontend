@@ -14,8 +14,8 @@ import FormLink from '../components/FormLink';
 
 
 interface FormData {
-    username: string;
-    password: string;
+    username: string,
+    password: string,
 };
 
 export function Login(){
@@ -54,5 +54,5 @@ export function Login(){
             {(errors?.username|| errors?.password) && <Error message={errors.username?.message || errors.password?.message}/>}
             <Button onClick={handleSubmit(onFormSubmit)} name='Sign In'/>
         </Form>
-    )
-}
+    );
+};

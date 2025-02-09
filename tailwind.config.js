@@ -9,6 +9,7 @@ export default {
     flowbite.content(),
   ],
   plugins: [
+    require('daisyui'),
     flowbite.plugin(),
   ],
   theme: {
@@ -18,5 +19,7 @@ export default {
       }
     },
   },
-  plugins: [],
+  daisyui: {
+    themes: ["cmyk", "dark",],
+  },
 }

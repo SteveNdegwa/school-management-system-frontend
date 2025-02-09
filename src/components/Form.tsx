@@ -20,5 +20,5 @@ export default function Form({formHeader, children}: props){
                 </div>
             </div>
         </section>
-    )
+    );
 };

@@ -1,5 +1,5 @@
 interface props{
-    message: any
+    message: any,
 };
 
 export default function Success({ message }: props){
@@ -13,5 +13,5 @@ export default function Success({ message }: props){
                 <span className="font-medium">{message}</span>
             </div>
         </div>
-    )
+    );
 };

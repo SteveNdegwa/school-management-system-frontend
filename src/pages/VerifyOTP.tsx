@@ -13,7 +13,7 @@ import ApiManager from '../ApiManager/ApiManager';
 import { setUserData } from '../store';
 
 interface FormData {
-    otp: string;
+    otp: string,
 };
 
 export function VerifyOTP(){
@@ -46,10 +46,10 @@ export function VerifyOTP(){
     return (
         <Form formHeader='Enter OTP'>
             <Toaster position='top-center' richColors/>
-            <Input inputType='text' inputId='otp' yupRegister={register('otp')}/>
+            <Input inputType='number' inputId='otp' yupRegister={register('otp')}/>
             {!errors?.otp && <Success message='OTP was sent to your email address'/>}
             {errors?.otp && <Error message={errors.otp?.message}/>}
             <Button onClick={handleSubmit(onFormSubmit)} name='Submit'/>
         </Form>
-    )
-}
+    );
+};

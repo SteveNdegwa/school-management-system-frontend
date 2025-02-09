@@ -11,31 +11,31 @@ class ApiMethods {
                     data: body
                 })
                 .then((response) => {
-                    response.data.code == '100.000.000' ? resolve(response.data) : reject(response.data.error)
+                    response.data.code == '100.000.000' ? resolve(response.data) : reject(response.data.error);
                 })
                 .catch((err) => {
-                    console.log(err)
-                    reject('An error occurred')
+                    console.log(err);
+                    reject('An error occurred');
                 });
         });
-    }
+    };
 
     static get(url: string){
-        return this.apiRequest('GET', url)
-    }
+        return this.apiRequest('GET', url);
+    };
 
     static post(url: string, data: object){
-        return this.apiRequest('POST', url, data)
-    }
+        return this.apiRequest('POST', url, data);
+    };
     
     static put(url: string, data: object){
-        return this.apiRequest('PUT', url, data)
-    }
+        return this.apiRequest('PUT', url, data);
+    };
 
     static delete(url: string, data: object){
-        return this.apiRequest('DELETE', url, data)
-    }
+        return this.apiRequest('DELETE', url, data);
+    };
 }
 
-export default ApiMethods
+export default ApiMethods;
 

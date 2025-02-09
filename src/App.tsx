@@ -11,15 +11,15 @@ export default function App() {
   return(
     <div className='app'>
       <Provider store={store}>
-      <Router>
-        <Routes>
-          <Route path='/' element={<Home/>}/>
-          <Route path='/login' element={<Login/>}/>
-          <Route path='/verify-otp' element={<VerifyOTP/>}/>
-          <Route path='/forgot-password' element={<ForgotPassword/>}/>
-          <Route path='/students' element={<Students/>}/>
-        </Routes>
-      </Router>
+        <Router>
+          <Routes>
+            <Route path='/' element={<Home/>}/>
+            <Route path='/login' element={<Login/>}/>
+            <Route path='/verify-otp' element={<VerifyOTP/>}/>
+            <Route path='/forgot-password' element={<ForgotPassword/>}/>
+            <Route path='/students' element={<Students/>}/>
+          </Routes>
+        </Router>
       </Provider> 
     </div>
   );

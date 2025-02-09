@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import Sidebar from "../components/Sidebar";
-import api from "../config/api";
 import { Table } from "../components/Table";
 import { row } from "../components/Table";
+import ApiManager from "../ApiManager/ApiManager";
+import Layout from "../components/Layout";
+import { useSelector } from "react-redux";
+import Searchbar from "../components/Searchbar";
 
 export interface user {
     id: string,
@@ -21,47 +23,41 @@ export interface user {
     other_name: string,
     gender: string,
     state_name: string,
-}
+};
 
 export function Students(){
-
-    const [rows, setRows] = useState<row[]>([])
-    const [rowsSet, setRowsSet] = useState<boolean>(false)
+    const schoolId = useSelector((state:any) => state.user?.school_id);
+    const [tableRows, setTableRows] = useState<row[]>([]);
+    let tableColumns = ["", "Name", "Username", "Role", "Classroom", "Link"];
 
     useEffect(()=>{
-        if (!rowsSet){
-            api
-                .post("/users/filter-users/", {role_name: "SuperAdmin", school_id:"757459e1-7b35-44ee-8509-e15ae8b58162"})
-                .then((response)=>{
-                    if (response.data.code == "100.000.000"){
-                        let data: row[] = [];
-                        let users: user[] = response.data.data
-                        console.log(users)
-                        users.map((user)=>{
-                            data.push({
-                                name: `${user.first_name} ${user.last_name}`,
-                                data: [user.username, user.role_name, "jsuahs"],
-                                link: `/users/${user.username}`,
-                            })
-                        })
-                        setRows(data)
-                        setRowsSet(true)
-                    }
-                    else{
-                        console.log(response)
-                    }
-                })
-                .catch((err)=> {
-                    console.log("This is the error", err)})
-        }
-    })
+        const fetchData = async () => {
+            const users: any = await ApiManager.filterUsers({"role_name": "SuperAdmin", "school_id": schoolId});
+            mapUsers(users.data);
+          }
+          fetchData()
+            .catch(console.error);
+    }, []);
 
-    let columns = ["name", "username", "role", "classroom", "link"]
-
+    const mapUsers = (users: user[]) => {
+        let count = 0;
+        let data: row[] = [];
+        users.map((user: user) =>{
+            count += 1;
+            data.push({
+                count: count,
+                name: `${user.first_name} ${user.last_name}`,
+                data: [user.username, user.role_name, user.classroom_name],
+                link: `/users/${user.username}`,
+            });
+        });
+        setTableRows(data);
+    }
 
     return (
-        <Sidebar>
-            <Table rows={rows} columns={columns}/>
-        </Sidebar>
-    )
-}
+        <Layout>
+            <Searchbar target={"users"} additionalFilters={{role_name: "SuperAdmin", "school_id": schoolId}} onSearch={mapUsers}/>
+            <Table rows={tableRows} columns={tableColumns}/>
+        </Layout>
+    );
+};

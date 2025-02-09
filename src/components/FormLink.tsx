@@ -1,6 +1,6 @@
 interface props{
     link: string,
-    text: string
+    text: string,
 };
 
 export default function Button({link, text}: props){
@@ -8,5 +8,5 @@ export default function Button({link, text}: props){
         <div className='flex items-center justify-between'>
             <a href={link} className='text-sm font-medium text-primary-600 hover:underline dark:text-primary-600'>{text}</a>
         </div>
-    )
+    );
 };
